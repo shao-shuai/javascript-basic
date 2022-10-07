@@ -1,15 +1,16 @@
 // ADD CODE HERE
 function after(num, callback) {
   let counter = 0;
+
   return (str) => {
-    while (counter < num) {
-      console.log(undefined);
+    if (counter < num) {
       counter++;
     }
-
-    callback(str);
+    console.log(counter);
+    if (counter === num) return callback(str);
   };
 }
+
 const called = function (string) {
   return "hello " + string;
 };
@@ -19,3 +20,4 @@ const afterCalled = after(3, called);
 console.log(afterCalled("world")); // -> undefined is printed
 console.log(afterCalled("world")); // -> undefined is printed
 console.log(afterCalled("world")); // -> 'hello world' is printed
+console.log(afterCalled("world"));
