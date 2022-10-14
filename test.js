@@ -1,4 +1,3 @@
-let obj = { cats: 2, dogs: 1 };
-for (let i in obj) {
-  console.log(i);
-}
+a = [1, 2, 3];
+a.push(4);
+console.log(a);
