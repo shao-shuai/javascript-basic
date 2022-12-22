@@ -42,8 +42,19 @@ function union(arrays) {
   );
 }
 
+function cascade(s) {
+  s = s.toString();
+  console.log(s);
+  if (s.length === 1) return; // exit condition
+  cascade(s.slice(0, -1));
+  console.log(s);
+}
+
 // Uncomment these to check your work!
 const arr1 = [5, 10, 15];
 const arr2 = [15, 88, 1, 5, 7];
 const arr3 = [100, 15, 10, 1, 5];
+console.time();
 console.log(union([arr1, arr2, arr3])); // should log: [5, 10, 15, 88, 1, 7, 100]
+console.log(cascade(111));
+console.timeEnd();

@@ -12,10 +12,13 @@ UserCreator.prototype.login = function () {
   console.log("Logged in!");
 };
 
+UserCreator.prototype.sayName = function () {
+  console.log(`My name is ${this.name}`);
+};
+
 const user1 = new UserCreator("Shuai", 99);
 const user2 = new UserCreator("Jia", 100);
 user3 = { h: 3, m: 4 };
 
-console.log(user1.__proto__);
-console.log(user1.prototype);
-console.log(user3.prototype);
+console.log(user1);
+console.log(UserCreator.prototype);
