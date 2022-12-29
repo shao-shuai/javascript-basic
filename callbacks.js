@@ -454,12 +454,12 @@ function addTen(num) {
 
 // Challenge 23
 function myFunc(array, callback) {
-  let inde = array.forEach((element, index) => {
+  let inde;
+  array.forEach((element, index) => {
     if (callback(element) === true) {
-      return index;
+      inde = index;
     }
   });
-  console.log(inde);
   if (inde) {
     return inde;
   } else {
@@ -480,12 +480,9 @@ function isOdd(num) {
 
 // Challenge 24
 function myForEach(array, callback) {
-  let total = 0;
   for (let i = 0; i < array.length; i++) {
-    total += array[i];
+    callback(array[i]);
   }
-
-  return total;
 }
 
 let sum = 0;
@@ -495,6 +492,6 @@ function addToSum(num) {
 }
 
 // /*** Uncomment these to check your work! ***/
-const nums = [1, 2, 3];
-myForEach(nums, addToSum);
-console.log(sum); // Should output 6
+// const nums = [1, 2, 3];
+// myForEach(nums, addToSum);
+// console.log(sum); // Should output 6
