@@ -325,12 +325,62 @@ function makeHistory(limit) {}
 // console.log(myActions('undo')); // => should log 'nothing to undo'
 
 // CHALLENGE 19
-function blackjack(array) {}
+function blackjack(array) {
+  function dealer(a, b) {
+    let count = 1;
+    let status = "normal";
+    let index = 0;
+    let sum = 0;
+    function player() {
+      if (count === 1) {
+        count += 1;
+        return a + b;
+      }
+
+      if (count === 2) {
+        if (array[index] + a + b <= 21) {
+          sum = array[index] + a + b;
+          index += 1;
+          count += 1;
+          return sum;
+        } else {
+          status = "bust";
+          count += 1;
+          array = array.slice(index + 1);
+          return "bust";
+        }
+      }
+
+      if (status === "bust") {
+        count += 1;
+        return "you are done!";
+      }
+
+      if (sum + array[index] <= 21) {
+        sum += array[index];
+        index += 1;
+        count += 1;
+        return sum;
+      } else {
+        status = "bust";
+        count += 1;
+        array = array.slice(index + 1);
+        return "bust";
+      }
+    }
+
+    return player;
+  }
+
+  return dealer;
+}
 
 // /*** Uncomment these to check your work! ***/
 
 // /*** DEALER ***/
-// const deal = blackjack([2, 6, 1, 7, 11, 4, 6, 3, 9, 8, 9, 3, 10, 4, 5, 3, 7, 4, 9, 6, 10, 11]);
+// const deal = blackjack([
+//   2, 6, 1, 7, 11, 4, 6, 3, 9, 8, 9, 3, 10, 4, 5, 3, 7, 4, 9, 6, 10, 11,
+// ]);
 
 // /*** PLAYER 1 ***/
 // const i_like_to_live_dangerously = deal(4, 5);
@@ -342,9 +392,9 @@ function blackjack(array) {}
 // console.log(i_like_to_live_dangerously()); // => should log 'you are done!'
 // console.log(i_like_to_live_dangerously()); // => should log 'you are done!'
 
-// /*** BELOW LINES ARE FOR THE BONUS ***/
+// // /*** BELOW LINES ARE FOR THE BONUS ***/
 
-// /*** PLAYER 2 ***/
+// // /*** PLAYER 2 ***/
 // const i_TOO_like_to_live_dangerously = deal(2, 2);
 // console.log(i_TOO_like_to_live_dangerously()); // => should log 4
 // console.log(i_TOO_like_to_live_dangerously()); // => should log 15
@@ -353,7 +403,7 @@ function blackjack(array) {}
 // console.log(i_TOO_like_to_live_dangerously()); // => should log 'you are done!
 // console.log(i_TOO_like_to_live_dangerously()); // => should log 'you are done!
 
-// /*** PLAYER 3 ***/
+// // /*** PLAYER 3 ***/
 // const i_ALSO_like_to_live_dangerously = deal(3, 7);
 // console.log(i_ALSO_like_to_live_dangerously()); // => should log 10
 // console.log(i_ALSO_like_to_live_dangerously()); // => should log 13
