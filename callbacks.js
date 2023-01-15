@@ -391,11 +391,11 @@ function pipe(arrOfFuncs, value) {
 }
 
 // /*** Uncomment these to check your work! ***/
-// const capitalize = (str) => str.toUpperCase();
-// const addLowerCase = (str) => str + str.toLowerCase();
-// const repeat = (str) => str + str;
-// const capAddlowRepeat = [capitalize, addLowerCase, repeat];
-// console.log(pipe(capAddlowRepeat, "cat")); // should log: 'CATcatCATcat'
+const capitalize = (str) => str.toUpperCase();
+const addLowerCase = (str) => str + str.toLowerCase();
+const repeat = (str) => str + str;
+const capAddlowRepeat = [capitalize, addLowerCase, repeat];
+console.log(pipe(capAddlowRepeat, "cat")); // should log: 'CATcatCATcat'
 
 // Challenge 21
 function highestFunc(objOfFuncs, subject) {
