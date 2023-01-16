@@ -30,18 +30,17 @@ function sum(array) {
 
 // Challenge 3
 function palindrome(string) {
-  // remove all non-alphanumeric characters
-  str = string.replace(/[^a-zA-Z0-9]/g, "");
-  str = str.toLowerCase();
+  let str = string.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
 
-  if (str.length <= 1) return true;
-
-  // base case
-  if (str[0] !== str[str.length - 1]) {
-    return false;
+  if (str.length < 2) {
+    return true;
   }
 
-  return palindrome(str.substring(1, str.length - 1));
+  if (str[0] === str[str.length - 1]) {
+    return palindrome(str.substring(1, str.length - 1));
+  } else {
+    return false;
+  }
 }
 
 // console.log(palindrome("Anne, I vote more cars race Rome-to-Vienna")); //-> true
@@ -154,31 +153,29 @@ function countWaysToReachNthStair(n) {
 // console.log(countWaysToReachNthStair(4)); //-> 5 ((1, 1, 1, 1), (1, 1, 2), (2, 1, 1), (2, 2))
 
 //Challenge 9
-function getPermutations(nums) {
-  let result = [];
-  if (nums.length === 0) return [];
-  if (nums.length === 1) return [nums];
-  for (let i = 0; i < nums.length; i++) {
-    const currentNum = nums[i];
-    console.log(`current num is ${currentNum}`);
-    const remainingNums = nums.slice(0, i).concat(nums.slice(i + 1));
-    console.log(`remaind nums is ${remainingNums}`);
-    const remainingNumsPermuted = getPermutations(remainingNums);
-
-    console.log(`remaindnumsper is ${remainingNumsPermuted}`);
-    console.log("----------");
-    for (let j = 0; j < remainingNumsPermuted.length; j++) {
-      const permutedArray = [currentNum].concat(remainingNumsPermuted[j]);
-      result.push(permutedArray);
-      // console.log(result);
-      // console.log("------");
-    }
+function getPermutations(arr) {
+  let res = [];
+  if (arr.length === 1) {
+    // why shallow copy
+    return [Array.from(arr)];
   }
-  return result;
+
+  for (let i = 0; i < arr.length; i++) {
+    const n = arr.shift();
+    let perms = getPermutations(arr);
+
+    for (let j = 0; j < perms.length; j++) {
+      perms[j].push(n);
+    }
+    res = res.concat(perms);
+    arr.push(n);
+  }
+
+  return res;
 }
 
-// console.log(getPermutations([1, 2])); //-> [[1, 2], [2, 1]]
-// console.log(getPermutations([1, 2, 3])); //-> [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+console.log(getPermutations([1, 2])); //-> [[1, 2], [2, 1]]
+console.log(getPermutations([1, 2, 3])); //-> [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
 
 //Challenge 10
 function getRangeBetween(x, y) {
