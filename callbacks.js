@@ -68,6 +68,22 @@ function reduce(array, callback, initialValue) {
   return accu;
 }
 
+function reduce2(array, callback, initialValue) {
+  let accu = initialValue + array[0];
+
+  for (let i = 1; i < array.length; i++) {
+    accu = callback(accu, array[i]);
+  }
+
+  return accu;
+}
+
+const nums = [4, 1, 3];
+const add = function (a, b) {
+  return a + b;
+};
+console.log(reduce2(nums, add, 0)); //-> 8
+
 // Test case
 // const nums = [4, 1, 3];
 // const add = function (a, b) {
