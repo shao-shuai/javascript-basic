@@ -89,5 +89,18 @@ function Lottery(initialJackpot) {
   };
 }
 
-const a = new Lottery(111);
-console.log(a.luckyDraw());
+// const a = new Lottery(111);
+// console.log(a.luckyDraw());
+
+// Chars
+
+function Chars(...initialString) {
+  if (initialString[0]) {
+    this.length = initialString[0];
+  } else {
+    this.length = 0;
+  }
+}
+
+const a = new Chars();
+console.log(a.length);
