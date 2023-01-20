@@ -87,6 +87,12 @@ function Lottery(initialJackpot) {
 
     return whiteBalls;
   };
+
+  this.match = function () {
+    let drawBalls = this.luckyDraw();
+    let whiteBalls = drawBalls.slice(0, 5);
+    let powerBall = drawBalls[5];
+  };
 }
 
 // const a = new Lottery(111);
@@ -102,5 +108,127 @@ function Chars(...initialString) {
   }
 }
 
-const a = new Chars();
-console.log(a.length);
+// const a = new Chars();
+// console.log(a.length);
+
+// OrderedList
+function OrderedList() {
+  this.data = [];
+  this.length = 0;
+
+  this.add = function (value) {
+    if (this.data.length === 0) {
+      this.data.push(value);
+      this.length += 1;
+    } else if (this.data.length === 1) {
+      if (value > this.data[0]) {
+        this.data.splice(0, 0, value);
+        this.length += 1;
+      } else {
+        this.data.push(value);
+        this.length += 1;
+      }
+    }
+    for (let i = 0; i < this.data.length; i++) {
+      if (value <= this.data[i] && value >= this.data[i + 1]) {
+        this.data.splice(i + 1, 0, value);
+        this.length += 1;
+      }
+      if (value >= this.data[i]) {
+        this.data.splice(i, 0, value);
+        this.length += 1;
+      }
+    }
+  };
+}
+
+const a = new OrderedList();
+a.add(99);
+a.add(898989);
+a.add(100);
+console.log(a.data);
+
+// Declare a function 'DuplicatedContainer', which takes in no arguments and returns an instance of a 'DuplicatedContainer' object when invoked with the 'new' keyword.
+// DuplicatedContainer objects should function similarly to objects - i.e., they will store elements as key-value pairs, and the value is the number of times the key appeared in the object.
+// All DuplicatedContainer objects should contain their own 'length' property, which keeps track of the number of items they contain. When a DuplicatedContainer is first created, it should have a length of 0.
+// - Task 1: Declare a function, 'add', which is accessible to ALL instances of 'DuplicatedContainer'. 'add' should take in a single argument, and when invoked on a DuplicatedContainer instance, should update the number of times that value appears as a key to that DuplicatedContainer, update the DuplicatedContainer's length property appropriately, and return the length of the DuplicatedContainer.
+// - Task 2: Declare a function 'update', which is accessible to ALL instances of 'DuplicatedContainer'. 'update' should take in a single argument as a callback function, and when invoked on a DuplicatedContainer instance, should update all the values (except the ‘length’ property) by applying the callback to the corresponding values of the instance.
+// - Task 3: Declare a function, 'pick', which is accessible to ALL instances of 'DuplicatedContainer'. 'pick' should take in an integer K as a single argument, and when invoked on a DuplicatedContainer instance, should return the Kth-most frequently occurring property in the instance (counting from 1). If there's more than one valid answer, return any of them. If the passed-in number is not a valid pick, return "Invalid pick!".
+
+function DuplicatedContainer() {
+  this.obj = {};
+  this.length = 0;
+
+  this.add = function (value) {
+    if (this.obj[value]) {
+      this.obj[value] += 1;
+    } else {
+      this.obj[value] = 1;
+      this.length += 1;
+    }
+
+    return this.lengh;
+  };
+
+  this.update = function (callback) {
+    for (let key in this.obj) {
+      callback(this.obj[key]);
+    }
+  };
+
+  this.pick = function (k) {};
+}
+
+// const a = new DuplicatedContainer();
+// a.add(1);
+// a.add(1);
+// console.log(a.obj);
+
+// Declare a class 'Storage' with 2 properties: size and capacity. The 'size' property keeps track of the number of current elements in the storage. The 'capacity' property is the maximum number of elements that storage can safely store. 'Storage' classes should function similarly to an Array - i.e. they will store values at numbered indexes, starting at 0.
+// - Task 1: Add a constructor to this class. The constructor takes in a single argument for the capacity property and initializes the size and the capacity. When a Storage is first created, it should have a size of 0.
+// - Task 2: Declare a function 'add', which is accessible to ALL instances of 'Storage'. 'add' should take in a single argument, and when invoked on a Storage instance, should add the argument to the first available position of that Storage and return the size of the instance. However, if the 'capacity' is exceeded, return "Maximum size exceeded!".
+// - Task 3: Declare a function 'remove', which is accessible to ALL instances of 'Storage'. 'remove' should take in a single argument which is the value that needs to be removed, and when invoked on a Storage instance, should remove all the properties with the corresponding value from the instance and return the size of that instance. If the value doesn’t exist, return "No values found!".
+class Store {
+  constructor(capacity) {
+    this.capacity = capacity;
+    this.size = 0;
+    this.storage = [];
+  }
+
+  add(arg) {
+    if (this.size > this.capacity - 1) {
+      console.log("Maximum size exceeded!");
+    } else {
+      this.storage[this.size] = arg;
+      this.size += 1;
+      return this.size;
+    }
+  }
+
+  remove(arg) {
+    let removed = 0;
+    for (let i = 0; i < this.storage.length; i++) {
+      if (this.storage[i] === arg) {
+        this.storage.splice(i, 1);
+        i--;
+        removed++;
+      }
+    }
+
+    this.size -= removed;
+
+    if (removed === 0) {
+      return "No value found!";
+    }
+
+    return this.size;
+  }
+}
+
+// const a = new Store(4);
+// a.add(89);
+// a.add(888);
+// a.add(999);
+// console.log(a);
+// a.remove(888);
+// console.log(a);
